@@ -47,4 +47,30 @@ public class NutritionController : ControllerBase
         }
     }
     
+    /// <summary>
+    /// Endpoint that takes in a Food Item ID and returns the nutrition values for that item. Structure of the response
+    /// is defined in NutritionValuesModel, using NutritionValueParser to organize the data.
+    /// </summary>
+    /// <param name="fdcId">Food Data Central API - Item ID</param>
+    /// <returns></returns>
+    [HttpGet("itemNutritionValues")]
+    public async Task<IActionResult> GetNutritionValues(string fdcId)
+    {
+        try
+        {
+            var nutritionValues = await _nutritionService.GetNutritionValues(fdcId);
+            if (nutritionValues == null)
+            {
+                return NotFound();
+            }
+            return Ok(nutritionValues);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Exception occurred while fetching nutrition values: {e.Message}", e);
+            return StatusCode(500, "Internal Server Error");
+        }
+    }
+    
+    
 }

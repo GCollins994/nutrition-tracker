@@ -32,4 +32,17 @@ public class NutritionService
             throw;
         }
     }
+    
+    public async Task<NutritionValuesModel> GetNutritionValues(string foodId)
+    {
+        try
+        {
+            return await _nutritionApiService.GetNutritionValueApiRequest(foodId);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Exception occurred while fetching nutrition values: {e.Message}", e);
+            throw;
+        }
+    }
 }

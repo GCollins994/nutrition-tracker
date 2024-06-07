@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Reflection.Metadata;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Nutrition_Tracker.Interfaces;
 using Nutrition_Tracker.Models;
 using Nutrition_Tracker.Utilities;
 
@@ -10,12 +13,17 @@ public class NutritionApiService
     private readonly ILogger<NutritionService> _logger;
     private readonly HttpClient _httpClient;
     private readonly ApiKeys _apiKeys;
+    private readonly IMemoryCache _cacheService;
+    private readonly INutritionValueParser _nutritionValueParser;
     
-    public NutritionApiService(ILogger<NutritionService> logger, HttpClient httpClient, IOptions<ApiKeys> apiKeys)
+    public NutritionApiService(ILogger<NutritionService> logger, HttpClient httpClient, IOptions<ApiKeys> apiKeys,
+        IMemoryCache cacheService, INutritionValueParser nutritionValueParser)
     {
         _logger = logger;
         _httpClient = httpClient;
         _apiKeys = apiKeys.Value;
+        _cacheService = cacheService;
+        _nutritionValueParser = nutritionValueParser;
         
         _logger.LogInformation($"API Key: {_apiKeys.FdcApiKey}"); // Debugging line
     }
@@ -47,6 +55,49 @@ public class NutritionApiService
             var result = JsonConvert.DeserializeObject<FoodSearchModel>(content);
 
             return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Exception occurred while fetching data from API: {e.Message}", e);
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Get Food Data Central API Nutrition Values. Input fdcId and get a list of values. Using NutritionValuesModel,
+    /// and Parsing the data using NutritionValuesParser.
+    /// </summary>
+    /// <param name="fdcId">Food Data Central API - Item ID</param>
+    /// <returns></returns>
+    public async Task<NutritionValuesModel> GetNutritionValueApiRequest(string fdcId)
+    {
+        try
+        {
+            var url = $"{Constants.fdcBaseUrlPrefix}food/{fdcId}?api_key={_apiKeys.FdcApiKey}";
+
+            var response = await PollyPolicies.HttpRequestRetry.ExecuteAsync(() =>
+                _httpClient.GetAsync(url)
+            );
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _logger.LogError($"Error fetching data from API: {response.StatusCode} - {response.ReasonPhrase}");
+                return null;
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            
+            // Log the response content for debugging
+            _logger.LogInformation($"API Response: {content}");
+
+            // Ensure the response content is not null or empty
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                _logger.LogError("API response content is null or empty");
+                return null;
+            }
+            
+            return _nutritionValueParser.ParseNutrition(content);
         }
         catch (Exception e)
         {
