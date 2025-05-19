@@ -64,3 +64,6 @@ C:\Users\O.G.Collins\Documents\GitHub\Tasks.WebApi\Nutrition-Tracker\Nutrition-T
 C:\Users\O.G.Collins\Documents\GitHub\Tasks.WebApi\Nutrition-Tracker\Nutrition-Tracker\bin\Debug\net7.0\Microsoft.Bcl.TimeProvider.dll
 C:\Users\O.G.Collins\Documents\GitHub\Tasks.WebApi\Nutrition-Tracker\Nutrition-Tracker\bin\Debug\net7.0\Polly.dll
 C:\Users\O.G.Collins\Documents\GitHub\Tasks.WebApi\Nutrition-Tracker\Nutrition-Tracker\bin\Debug\net7.0\Polly.Core.dll
+C:\Users\O.G.Collins\Documents\GitHub\Tasks.WebApi\Nutrition-Tracker\Nutrition-Tracker\bin\Debug\net7.0\Microsoft.ApplicationInsights.dll
+C:\Users\O.G.Collins\Documents\GitHub\Tasks.WebApi\Nutrition-Tracker\Nutrition-Tracker\bin\Debug\net7.0\Serilog.Sinks.ApplicationInsights.dll
+C:\Users\O.G.Collins\Documents\GitHub\Tasks.WebApi\Nutrition-Tracker\Nutrition-Tracker\obj\Debug\net7.0\Nutrition-Tracker.sourcelink.json

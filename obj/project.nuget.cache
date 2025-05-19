@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "b31pLyGE1zxmUvKxwesyewYPLwUhnrzcsfsRU3y/XwKuTYnm9utEez7Wf+TWB1CDTGPTtSWvvARbabyybdkkbg==",
+  "dgSpecHash": "T2M+WL3q6Qc=",
   "success": true,
   "projectFilePath": "C:\\Users\\O.G.Collins\\Documents\\GitHub\\Tasks.WebApi\\Nutrition-Tracker\\Nutrition-Tracker\\Nutrition-Tracker.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\O.G.Collins\\.nuget\\packages\\microsoft.applicationinsights\\2.21.0\\microsoft.applicationinsights.2.21.0.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.0\\microsoft.aspnetcore.jsonpatch.7.0.0.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.0.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.4\\microsoft.aspnetcore.openapi.7.0.4.nupkg.sha512",
@@ -34,9 +35,10 @@
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\serilog.extensions.logging\\8.0.0\\serilog.extensions.logging.8.0.0.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\serilog.formatting.compact\\2.0.0\\serilog.formatting.compact.2.0.0.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\serilog.settings.configuration\\8.0.0\\serilog.settings.configuration.8.0.0.nupkg.sha512",
+    "C:\\Users\\O.G.Collins\\.nuget\\packages\\serilog.sinks.applicationinsights\\4.0.1-dev-00043\\serilog.sinks.applicationinsights.4.0.1-dev-00043.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\serilog.sinks.console\\5.0.0\\serilog.sinks.console.5.0.0.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\serilog.sinks.debug\\2.0.0\\serilog.sinks.debug.2.0.0.nupkg.sha512",
-    "C:\\Users\\O.G.Collins\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512",
+    "C:\\Users\\O.G.Collins\\.nuget\\packages\\serilog.sinks.file\\5.0.1-dev-00972\\serilog.sinks.file.5.0.1-dev-00972.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\O.G.Collins\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

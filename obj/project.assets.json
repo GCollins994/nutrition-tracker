@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net7.0": {
+      "Microsoft.ApplicationInsights/2.21.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.ApplicationInsights.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.ApplicationInsights.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.JsonPatch/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -527,6 +543,23 @@
           }
         }
       },
+      "Serilog.Sinks.ApplicationInsights/4.0.1-dev-00043": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "2.21.0",
+          "Serilog": "2.12.0"
+        },
+        "compile": {
+          "lib/net6.0/Serilog.Sinks.ApplicationInsights.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Serilog.Sinks.ApplicationInsights.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Serilog.Sinks.Console/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -559,18 +592,18 @@
           }
         }
       },
-      "Serilog.Sinks.File/5.0.0": {
+      "Serilog.Sinks.File/5.0.1-dev-00972": {
         "type": "package",
         "dependencies": {
           "Serilog": "2.10.0"
         },
         "compile": {
-          "lib/net5.0/Serilog.Sinks.File.dll": {
+          "lib/net6.0/Serilog.Sinks.File.dll": {
             "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net5.0/Serilog.Sinks.File.dll": {
+          "lib/net6.0/Serilog.Sinks.File.dll": {
             "related": ".pdb;.xml"
           }
         }
@@ -698,6 +731,27 @@
     }
   },
   "libraries": {
+    "Microsoft.ApplicationInsights/2.21.0": {
+      "sha512": "btZEDWAFNo9CoYliMCriSMTX3ruRGZTtYw4mo2XyyfLlowFicYVM2Xszi5evDG95QRYV7MbbH3D2RqVwfZlJHw==",
+      "type": "package",
+      "path": "microsoft.applicationinsights/2.21.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net452/Microsoft.ApplicationInsights.dll",
+        "lib/net452/Microsoft.ApplicationInsights.pdb",
+        "lib/net452/Microsoft.ApplicationInsights.xml",
+        "lib/net46/Microsoft.ApplicationInsights.dll",
+        "lib/net46/Microsoft.ApplicationInsights.pdb",
+        "lib/net46/Microsoft.ApplicationInsights.xml",
+        "lib/netstandard2.0/Microsoft.ApplicationInsights.dll",
+        "lib/netstandard2.0/Microsoft.ApplicationInsights.pdb",
+        "lib/netstandard2.0/Microsoft.ApplicationInsights.xml",
+        "microsoft.applicationinsights.2.21.0.nupkg.sha512",
+        "microsoft.applicationinsights.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.JsonPatch/7.0.0": {
       "sha512": "svHQiUvLNdI2nac68WNQHNo/ZWyavFpt3Oip09QRnWeFqG9iyakKiNLavXr6KE8y7KxEXZNld96KQYbKz8SJMQ==",
       "type": "package",
@@ -1790,6 +1844,24 @@
         "serilog.settings.configuration.nuspec"
       ]
     },
+    "Serilog.Sinks.ApplicationInsights/4.0.1-dev-00043": {
+      "sha512": "1mGtCIRxhak2HUUUb1k8pvSHxOcqRjvKOrhzgtxFW+P8oqEvyozqRB8nRVqIdGj1H2Cv8mGTQTrQs2FMLnWJUQ==",
+      "type": "package",
+      "path": "serilog.sinks.applicationinsights/4.0.1-dev-00043",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net462/Serilog.Sinks.ApplicationInsights.dll",
+        "lib/net462/Serilog.Sinks.ApplicationInsights.xml",
+        "lib/net6.0/Serilog.Sinks.ApplicationInsights.dll",
+        "lib/net6.0/Serilog.Sinks.ApplicationInsights.xml",
+        "lib/netstandard2.0/Serilog.Sinks.ApplicationInsights.dll",
+        "lib/netstandard2.0/Serilog.Sinks.ApplicationInsights.xml",
+        "serilog.sinks.applicationinsights.4.0.1-dev-00043.nupkg.sha512",
+        "serilog.sinks.applicationinsights.nuspec"
+      ]
+    },
     "Serilog.Sinks.Console/5.0.0": {
       "sha512": "IZ6bn79k+3SRXOBpwSOClUHikSkp2toGPCZ0teUkscv4dpDg9E2R2xVsNkLmwddE4OpNVO3N0xiYsAH556vN8Q==",
       "type": "package",
@@ -1839,10 +1911,10 @@
         "serilog.sinks.debug.nuspec"
       ]
     },
-    "Serilog.Sinks.File/5.0.0": {
-      "sha512": "uwV5hdhWPwUH1szhO8PJpFiahqXmzPzJT/sOijH/kFgUx+cyoDTMM8MHD0adw9+Iem6itoibbUXHYslzXsLEAg==",
+    "Serilog.Sinks.File/5.0.1-dev-00972": {
+      "sha512": "fIK2UIewc1meCDpL8pOJLy0QRe1IzqJ3cnSXjz7GpPVVCr715nFloa49QKeK4dFPDgQk9xU3zi3ioIVefSi0+Q==",
       "type": "package",
-      "path": "serilog.sinks.file/5.0.0",
+      "path": "serilog.sinks.file/5.0.1-dev-00972",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1853,6 +1925,9 @@
         "lib/net5.0/Serilog.Sinks.File.dll",
         "lib/net5.0/Serilog.Sinks.File.pdb",
         "lib/net5.0/Serilog.Sinks.File.xml",
+        "lib/net6.0/Serilog.Sinks.File.dll",
+        "lib/net6.0/Serilog.Sinks.File.pdb",
+        "lib/net6.0/Serilog.Sinks.File.xml",
         "lib/netstandard1.3/Serilog.Sinks.File.dll",
         "lib/netstandard1.3/Serilog.Sinks.File.pdb",
         "lib/netstandard1.3/Serilog.Sinks.File.xml",
@@ -1862,7 +1937,7 @@
         "lib/netstandard2.1/Serilog.Sinks.File.dll",
         "lib/netstandard2.1/Serilog.Sinks.File.pdb",
         "lib/netstandard2.1/Serilog.Sinks.File.xml",
-        "serilog.sinks.file.5.0.0.nupkg.sha512",
+        "serilog.sinks.file.5.0.1-dev-00972.nupkg.sha512",
         "serilog.sinks.file.nuspec"
       ]
     },
@@ -2093,6 +2168,8 @@
       "Polly >= 8.4.0",
       "Serilog >= 4.0.0-dev-02160",
       "Serilog.AspNetCore >= 8.0.2-dev-00338",
+      "Serilog.Sinks.ApplicationInsights >= 4.0.1-dev-00043",
+      "Serilog.Sinks.File >= 5.0.1-dev-00972",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -2169,6 +2246,14 @@
           "Serilog.AspNetCore": {
             "target": "Package",
             "version": "[8.0.2-dev-00338, )"
+          },
+          "Serilog.Sinks.ApplicationInsights": {
+            "target": "Package",
+            "version": "[4.0.1-dev-00043, )"
+          },
+          "Serilog.Sinks.File": {
+            "target": "Package",
+            "version": "[5.0.1-dev-00972, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

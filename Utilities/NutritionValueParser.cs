@@ -13,16 +13,21 @@ public class NutritionValueParser : INutritionValueParser
     public NutritionValuesModel ParseNutrition(string json)
     {
         var jsonNutrition = JObject.Parse(json);
-        
-        var labelNutrients = jsonNutrition["labelNutrients"].ToObject<LabelNutrients>();
-        
+
+        var labelNutrientsToken = jsonNutrition["labelNutrients"];
+        LabelNutrients labelNutrients = labelNutrientsToken != null
+            ? labelNutrientsToken.ToObject<LabelNutrients>()
+            : new LabelNutrients(); // fallback if missing, could be null
+
         var nutritionValuesModel = new NutritionValuesModel
         {
-            FoodId = (string)jsonNutrition["fdcId"],
-            Description = (string)jsonNutrition["description"],
-            FoodCategory = (string)jsonNutrition["foodCategory"],
+            FoodId = (string?)jsonNutrition["fdcId"] ?? "N/A",
+            Description = (string?)jsonNutrition["description"] ?? "N/A",
+            FoodCategory = (string?)jsonNutrition["foodCategory"]
+                           ?? (string?)jsonNutrition["brandedFoodCategory"]
+                           ?? "Unknown",
             PortionSize = (double?)jsonNutrition["servingSize"] ?? 0,
-            PortionSizeUnit = (string)jsonNutrition["servingSizeUnit"],
+            PortionSizeUnit = (string?)jsonNutrition["servingSizeUnit"] ?? "g",
             LabelNutrients = labelNutrients
         };
 

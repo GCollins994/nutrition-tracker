@@ -39,6 +39,14 @@ public class NutritionApiService
     {
         try
         {
+            string cacheKey = CacheKeys.FoodSearchCachePrefix + input.ToLower().Trim(); // Combining Cache prefix with search term
+            // Attempt to retrieve the Data from cache if exists
+            if (_cacheService.TryGetValue(cacheKey, out FoodSearchModel cachedResult))
+            {
+                _logger.LogInformation($"Cached SearchFood Data loaded successfully for: {input}");
+                return cachedResult;
+            }
+            
             var url = $"{Constants.fdcBaseUrlPrefix}foods/search?query={input}&api_key={_apiKeys.FdcApiKey}&pageSize={(int)itemsPerPage}&pageNumber={pageNumber}";
                 
             var response = await PollyPolicies.HttpRequestRetry.ExecuteAsync(() =>
@@ -53,12 +61,16 @@ public class NutritionApiService
         
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<FoodSearchModel>(content);
+            
+            // Save SearchFood DATA to cache
+            _cacheService.Set(cacheKey, result, TimeSpan.FromHours(24));
+            _logger.LogInformation($"SearchFood Input Data Cached successfully: {input}");
 
             return result;
         }
         catch (Exception e)
         {
-            _logger.LogError($"Exception occurred while fetching data from API: {e.Message}", e);
+            _logger.LogError($"Exception occurred while fetching Data from API: {e.Message}", e);
             throw;
         }
     }
@@ -73,6 +85,15 @@ public class NutritionApiService
     {
         try
         {
+            string cacheKey = CacheKeys.NutritionValuesCachePrefix + fdcId.ToLower(); // Combining Cache prefix with search term
+            // Attempt to retrieve the Data from cache if exists
+            if (_cacheService.TryGetValue(cacheKey, out NutritionValuesModel cachedResult))
+            {
+                _logger.LogInformation($"Cached Data returned: {JsonConvert.SerializeObject(cachedResult)}");
+                _logger.LogInformation($"Cached NutritionValue Data loaded successfully for: {fdcId}");
+                return cachedResult;
+            }
+            
             var url = $"{Constants.fdcBaseUrlPrefix}food/{fdcId}?api_key={_apiKeys.FdcApiKey}";
 
             var response = await PollyPolicies.HttpRequestRetry.ExecuteAsync(() =>
@@ -97,7 +118,13 @@ public class NutritionApiService
                 return null;
             }
             
-            return _nutritionValueParser.ParseNutrition(content);
+            var parsedModel = _nutritionValueParser.ParseNutrition(content);
+            
+            // Save NutritionValue DATA to cache
+            _cacheService.Set(cacheKey, parsedModel, TimeSpan.FromHours(24));
+            _logger.LogInformation($"NutritionValue fdcId Data Cached successfully: {fdcId}");
+            
+            return parsedModel;
         }
         catch (Exception e)
         {

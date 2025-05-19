@@ -12,3 +12,9 @@ public class ApiKeys
 {
     public string FdcApiKey { get; set; }
 }
+
+public class CacheKeys
+{
+    public const string FoodSearchCachePrefix = "FoodSearch_";
+    public const string NutritionValuesCachePrefix = "NutritionValues_";
+}
